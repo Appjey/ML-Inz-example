@@ -1,5 +1,5 @@
 
-# My Project
+# ML-Inz-example
 
 This project contains two main components:
 1. A Flask backend serving HTML, CSS, and JavaScript.
