@@ -7,10 +7,9 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     git
 
-COPY ./app /app/app
-COPY ./requirements.txt /app/requirements.txt
-
 WORKDIR /app
+
+COPY ./requirements.txt /app/requirements.txt
 
 RUN pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121
 
@@ -18,13 +17,7 @@ RUN useradd -m huggingface
 
 USER huggingface
 
-WORKDIR /app/huggingface
-
 ENV USE_TORCH=1
 ENV PYTHONPATH=/app
-
-RUN mkdir -p /app/huggingface/.cache/huggingface \
-  && mkdir -p /app/huggingface/input \
-  && mkdir -p /app/huggingface/output
 
 CMD ["python", "/app/app/main.py"]

@@ -4,11 +4,16 @@ services:
   backend:
     build: ./backend
     ports:
-      - "8000:80"
+      - "8880:80"
+    volumes:
+      - ./backend/app:/app/app
+
   ml_service:
     build: ./ml_service
     ports:
-      - "8001:80"
+      - "8881:80"
+    volumes:
+      - ./ml_service/app:/app/app
     deploy:
       resources:
         reservations:
@@ -17,5 +22,5 @@ services:
               count: 1
               capabilities: [gpu]
     environment:
-    - CUDA_VISIBLE_DEVICES=0
-#    - TORCH_CUDA_ALLOC_CONF=max_split_size_mb:128  # Ограничение размера выделяемых блоков памяти
+      - CUDA_VISIBLE_DEVICES=0
+#      - TORCH_CUDA_ALLOC_CONF=max_split_size_mb:128  # Ограничение размера выделяемых блоков памяти

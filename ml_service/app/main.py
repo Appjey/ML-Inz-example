@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
 if platform == "linux" or platform == "linux2":
-    from .model import generate_response
+    from model import generate_response
 
 elif platform == "win32":
     from model import generate_response
