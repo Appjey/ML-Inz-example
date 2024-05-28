@@ -112,7 +112,7 @@ cd my_project
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # On Windows use `venv\Scriptsctivate`
+source venv/bin/activate  # On Windows use `venv\ScriptsActivate`
 ```
 
 3. Install the dependencies:
