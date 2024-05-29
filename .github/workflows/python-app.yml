@@ -61,8 +61,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: test
     steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
     - name: Stop and remove containers, networks
       run: docker-compose down
+      working-directory: ${{ github.workspace }}
     - name: Remove unused data
       run: docker system prune -a -f
 
@@ -83,10 +86,13 @@ jobs:
         docker build . --file Backend/Dockerfile --tag my-backend-image:latest
         docker tag my-backend-image:latest ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
+      working-directory: ${{ github.workspace }}
     - name: Build and push ml_service Docker image
       run: |
         docker build . --file ml_service/Dockerfile --tag my-ml-service-image:latest
         docker tag my-ml-service-image:latest ${{ secrets.DOCKER_USERNAME }}/my-ml-service-image:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/my-ml-service-image:latest
+      working-directory: ${{ github.workspace }}
     - name: Deploy with docker-compose
       run: docker-compose up -d
+      working-directory: ${{ github.workspace }}
