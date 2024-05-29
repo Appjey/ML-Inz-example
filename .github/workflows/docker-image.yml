@@ -27,7 +27,7 @@ jobs:
 
     - name: Build and push backend Docker image
       run: |
-        docker build . --file backend/Dockerfile --tag my-backend-image:latest
+        docker build . --file Backend/Dockerfile --tag my-backend-image:latest
         docker tag my-backend-image:latest ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
         docker push ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
 
