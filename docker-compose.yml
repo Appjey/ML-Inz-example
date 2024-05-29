@@ -14,13 +14,13 @@ services:
       - "8881:80"
     volumes:
       - ./ml_service/app:/app/app
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [gpu]
+#    deploy:
+#      resources:
+#        reservations:
+#          devices:
+#            - driver: nvidia
+#              count: 1
+#              capabilities: [gpu]
     environment:
       - CUDA_VISIBLE_DEVICES=0
 #      - TORCH_CUDA_ALLOC_CONF=max_split_size_mb:128  # Ограничение размера выделяемых блоков памяти
