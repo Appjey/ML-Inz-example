@@ -72,15 +72,15 @@ jobs:
       # Build and push backend Docker image
       - name: Build and push backend Docker image
         run: |
-          docker build . --file Dockerfile --tag my-backend-image:latest
+          docker build -t my-backend-image:latest .
           docker tag my-backend-image:latest ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
-        working-directory: ./Backend  # Ensure this path is correct
+        working-directory: ./backend  # Ensure this path is correct
 
       # Build and push ml_service Docker image
       - name: Build and push ml_service Docker image
         run: |
-          docker build . --file Dockerfile --tag my-ml-service-image:latest
+          docker build -t my-ml-service-image:latest .
           docker tag my-ml-service-image:latest ${{ secrets.DOCKER_USERNAME }}/my-ml-service-image:latest
           docker push ${{ secrets.DOCKER_USERNAME }}/my-ml-service-image:latest
         working-directory: ./ml_service  # Ensure this path is correct
@@ -89,4 +89,5 @@ jobs:
       - name: Deploy with docker-compose
         run: docker-compose up -d
         working-directory: ./
+
 
