@@ -57,30 +57,30 @@ jobs:
 #      - name: Clean up disk space after tests
 #        run: sudo docker system prune -a -f
 
-   deploy:
+  deploy:
     runs-on: ubuntu-latest
-#    needs: prepare-environment
     steps:
-    - uses: actions/checkout@v4
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
-    - name: Log in to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-    - name: Build and push backend Docker image
-      run: |
-        docker build . --file Backend/Dockerfile --tag my-backend-image:latest
-        docker tag my-backend-image:latest ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
-      working-directory: ./
-    - name: Build and push ml_service Docker image
-      run: |
-        docker build . --file ml_service/Dockerfile --tag my-ml-service-image:latest
-        docker tag my-ml-service-image:latest ${{ secrets.DOCKER_USERNAME }}/my-ml-service-image:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/my-ml-service-image:latest
-      working-directory: ./
-    - name: Deploy with docker-compose
-      run: docker-compose up -d
-      working-directory: ./
+      - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push backend Docker image
+        run: |
+          docker build . --file Backend/Dockerfile --tag my-backend-image:latest
+          docker tag my-backend-image:latest ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-backend-image:latest
+        working-directory: ./Backend
+      - name: Build and push ml_service Docker image
+        run: |
+          docker build . --file ml_service/Dockerfile --tag my-ml-service-image:latest
+          docker tag my-ml-service-image:latest ${{ secrets.DOCKER_USERNAME }}/my-ml-service-image:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/my-ml-service-image:latest
+        working-directory: ./ml_service
+      - name: Deploy with docker-compose
+        run: docker-compose up -d
+        working-directory: ./
+

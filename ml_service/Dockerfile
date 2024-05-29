@@ -9,9 +9,10 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY requirements.txt /app/requirements.txt
+# Ensure requirements.txt is at the root of the build context
+COPY ./requirements.txt /app/requirements.txt
 
-RUN pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121
+RUN pip install -r /app/requirements.txt --extra-index-url https://download.pytorch.org/whl/cu121
 
 RUN useradd -m huggingface
 

@@ -1,7 +1,7 @@
 FROM python:3.11-slim
 
 COPY ./app /app/app
-COPY requirements.txt /app/requirements.txt
+COPY ./requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
