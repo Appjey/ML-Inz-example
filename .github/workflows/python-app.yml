@@ -114,8 +114,7 @@ jobs:
 
       - name: Publish to PyPI
         env:
-          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+          password: ${{ secrets.TEST_PYPI_API_TOKEN }}
         run: |
           python -m twine upload dist/*
         working-directory: ./  # Adjust this if your setup.py is not in the root directory
