@@ -34,7 +34,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
   test:
     runs-on: ubuntu-latest
-
+    needs: build
     steps:
       - name: Test Backend with pytest
         run: pytest ./Backend/tests/
