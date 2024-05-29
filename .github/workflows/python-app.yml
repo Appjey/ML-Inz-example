@@ -51,7 +51,7 @@ jobs:
       - name: Clean up disk space before tests
         run: sudo docker system prune -a -f
       - name: Test Backend with pytest
-        run: pytest ./backend/tests/
+        run: pytest ./Backend/tests/
       - name: Test ML Service with pytest
         run: pytest ./ml_service/tests/
       - name: Clean up disk space after tests
