@@ -47,7 +47,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
           if [ -f Backend/requirements.txt ]; then pip install -r Backend/requirements.txt; fi
-          if [ -f ml_service/requirements.txt ]; then pip install -r ml_service/requirements.txt; fi
+          if [ -f ml_service/requirements.txt ]; then pip install -r ml_service/test_requirements.txt; fi
       - name: Clean up disk space before tests
         run: sudo docker system prune -a -f
       - name: Test Backend with pytest
